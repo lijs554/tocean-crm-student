@@ -1,38 +1,32 @@
 <template>
     <div>
         <div class="crumbs">
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-date"></i> 表单</el-breadcrumb-item>
-                <el-breadcrumb-item>图片上传</el-breadcrumb-item>
-            </el-breadcrumb>
+            <el-row>
+                <el-col :span="2" ><div class="grid-content bg-purple-light font1">当前功能：</div></el-col>
+                <el-col :span="90"><div class="grid-content bg-purple-light font2">调查列表管理</div></el-col>
+            </el-row>
         </div>
-        <div class="content-title">支持拖拽</div>
         <div class="plugins-tips">
-            Element UI自带上传组件。
-            访问地址：<a href="http://element.eleme.io/#/zh-CN/component/upload" target="_blank">Element UI Upload</a>
+            <input class="btn" type="button" value="提交"/>
         </div>
-        <el-upload
-            class="upload-demo"
-            drag
-            action="/api/posts/"
-            multiple>
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-        </el-upload>
-        <div class="content-title">支持裁剪</div>
-        <div class="plugins-tips">
-            Vue-Core-Image-Upload：一款轻量级的vue上传插件，支持裁剪。
-            访问地址：<a href="https://github.com/Vanthink-UED/vue-core-image-upload" target="_blank">Vue-Core-Image-Upload</a>
+        <div class="border">
+            <div class="select-tips">
+                <i class="s1">基本资料</i><i class="s2"> (+ 单击标题栏展开) </i>
+            </div>
+            <table class="imagetable">
+                <tr>
+                    <th>简历:</th>
+                    <td><input class="k1"  type="file" accept="image/*" /></td>
+                </tr>
+            </table>
         </div>
-        <img class="pre-img" :src="src" alt="">
-        <vue-core-image-upload :class="['pure-button','pure-button-primary','js-btn-crop']"
-                               :crop="true"
-                               text="上传图片"
-                               url="/api/posts/"
-                               extensions="png,gif,jpeg,jpg"
-                               @:imageuploaded="imageuploaded"
-                               @:errorhandle="handleError"></vue-core-image-upload>
+        <div class="max_btn">
+            <div class="btn_box">
+                <input class="btn1" type="button" value="确认提交"/>
+                <input class="btn1" type="button" value="重新输入"/>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -63,6 +57,73 @@
 </script>
 
 <style scoped>
+    .border{
+        width:100%;
+        height:auto;
+        border:1px solid #d1e2f2;
+    }
+    table.imagetable {
+        font-family: verdana,arial,sans-serif;
+        font-size:11px;
+        color:#409EFF;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+        width:95%;
+        margin:20px auto 20px;
+    }
+    table.imagetable th {
+        background: #eef7fd;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #999999;
+        text-align: right;
+        width:150px;
+        padding-right:10px;
+    }
+    table.imagetable td {
+        background: #eef7fd;
+        border-width: 1px;
+        padding:8px 0;
+        border-style: solid;
+        border-color: #999999;
+        width:1000px;
+        text-align: right;
+    }
+    table.imagetable td .k1 {
+        border-width: 1px;
+        border-style: solid;
+        border-color: #999999;
+        width:500px;
+        height:auto;
+        float: left;
+        margin-left:50px;
+        float: left;
+        text-align: right;
+    }
+    table.imagetable td .k2 {
+        width:70px;
+        height:auto;
+        margin-left:0px;
+    }
+    .select-tips{
+        width:100%;
+        height: 35px;
+        background: #d1e2f2;
+        line-height: 35px;
+    }
+    .select-tips .s1{
+        color: #409EFF;
+        font-size:16px;
+        font-weight: bold;
+        font-style: normal;
+        padding-left:5px;
+    }
+    .select-tips .s2{
+        font-size: 12px;
+        color:#409EFF;
+        font-style: normal;
+    }
     .content-title{
         font-weight: 400;
         line-height: 50px;
@@ -70,9 +131,51 @@
         font-size: 22px;
         color: #1f2f3d;
     }
-    .pre-img{
-        width:250px;
-        height: 250px;
-        margin-bottom: 20px;
+    .max_btn{
+        width:100%;
+        height: 45px;
+        background: #d1e2f2;
+        line-height: 45px;
+    }
+    .max_btn .btn_box{
+        width:150px;
+        height:auto;
+        position: relative;
+        left:50%;
+        margin-left:-50px;
+        margin-top:30px;
+    }
+    .plugins-tips .btn{
+        background: #f0f0f0;
+        color: #409EFF;
+        float: right;
+        border: 1px solid #d1e2f2;
+        margin-top: -10px;
+        margin-right: 20px;
+    }
+    .plugins-tips .btn1{
+        background: #f0f0f0;
+        color: #409EFF;
+        float: right;
+        border: 1px solid #d1e2f2;
+        margin-top: -10px;
+        margin-right:10px;
+    }
+    .bg-purple-light {
+        background: #e5e9f2;
+    }
+    .grid-content {
+        min-height: 36px;
+        line-height: 36px;
+    }
+    .font1{
+        font-size: 12px;
+        padding-left:5px;
+        color:#409EFF;
+    }
+    .font2{
+        font-size: 20px;
+        color: #409EFF;
+        font-weight: bold;
     }
 </style>
