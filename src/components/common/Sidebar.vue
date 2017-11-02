@@ -30,57 +30,64 @@
             return {
                 items: [
                     {
-                        icon: 'el-icon-setting',
                         index: 'readme',
-                        title: '自述'
+                        title: '公告栏'
                     },
                     {
-                        icon: 'el-icon-menu',
                         index: '2',
-                        title: '表格',
-                        subs: [
-                            {
-                                index: 'basetable',
-                                title: '基础表格'
-                            },
-                            {
-                                index: 'vuetable',
-                                title: 'Vue表格组件'
-                            }
-                        ]
+                        title: '提交作业',
                     },
                     {
-                        icon: 'el-icon-date',
-                        index: '3',
-                        title: '表单',
+                        index: '2',
+                        title: '提交项目'
+                    },
+                    {
+                        index: '4',
+                        title: '提交报告',
                         subs: [
                             {
                                 index: 'baseform',
-                                title: '基本表单'
+                                title: '提交日报'
                             },
                             {
                                 index: 'vueeditor',
-                                title: '编辑器'
+                                title: '提交周报'
                             },
                             {
                                 index: 'markdown',
-                                title: 'markdown'
+                                title: '历史日报'
                             },
                             {
                                 index: 'upload',
-                                title: '文件上传'
+                                title: '历史周报'
                             }
                         ]
                     },
                     {
-                        icon: 'el-icon-star-on',
                         index: 'basecharts',
-                        title: '图表'
+                        title: '问卷调查',
+                        subs: [
+                            {
+                                index: 'baseform',
+                                title: '填写问卷'
+                            },
+                            {
+                                index: 'vueeditor',
+                                title: '历史问卷'
+                            },
+                        ]
                     },
                     {
-                        icon: 'el-icon-upload2',
                         index: 'drag',
-                        title: '拖拽'
+                        title: '上传简历'
+                    },
+                    {
+                        index: 'drag',
+                        title: '就业申请'
+                    },
+                    {
+                        index: 'drag',
+                        title: '学员信息查询'
                     }
                 ]
             }
