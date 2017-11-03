@@ -44,11 +44,11 @@
                         title: '提交报告',
                         subs: [
                             {
-                                index: 'week_Report',
+                                index: 'day_Report',
                                 title: '提交日报'
                             },
                             {
-                                index: 'day_Report',
+                                index: 'week_Report',
                                 title: '提交周报'
                             },
                             {
@@ -80,7 +80,7 @@
                         title: '上传简历'
                     },
                     {
-                        index: 'employment',
+                        index: 'Employment',
                         title: '就业申请'
                     },
                     {
@@ -88,15 +88,15 @@
                         title: '学员信息查询',
                         subs: [
                             {
-                                index: 'student_files',
+                                index: 'Student_files',
                                 title: '学员档案'
                             },
                             {
-                                index: 'attendance_Record',
+                                index: 'Attendance_Record',
                                 title: '考勤记录'
                             },
                             {
-                                index: 'discipline_record',
+                                index: 'Discipline_record',
                                 title: '违纪记录'
                             },
                             {
@@ -157,6 +157,7 @@
         top: 70px;
         bottom:0;
         background: #2E363F;
+        overflow-y:scroll
     }
     .sidebar > ul {
         height:100%;

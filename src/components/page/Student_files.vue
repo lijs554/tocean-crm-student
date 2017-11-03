@@ -65,20 +65,20 @@
 
 		<div class="content1">
 			<div class="contentTitle"><b>学员信息列表</b> (+ 单击标题栏展开)</div>
-			<el-table :data="tableData" border style="width: 100%">
-				<el-table-column prop="xh" label="序号" width="79px">
+			<el-table :data="data"  border style="width: 100%">
+				<el-table-column prop="Number" label="序号" width="79px">
 				</el-table-column>
 				<el-table-column prop="name" label="学员名称" width="102px">
 				</el-table-column>
 				<el-table-column prop="id" label="学号" width="120px">
 				</el-table-column>
-				<el-table-column prop="contentClass" label="班级" width="88px">
+				<el-table-column prop="class" label="班级" width="88px">
 				</el-table-column>
 				<el-table-column prop="sex" label="性别" width="74px">
 				</el-table-column>
-				<el-table-column prop="grad" label="学历" width="68px">
+				<el-table-column prop="Education" label="学历" width="68px">
 				</el-table-column>
-				<el-table-column prop="startPhone" label="入学时联系电话" width="136px">
+				<el-table-column prop="phone" label="入学时联系电话" width="136px">
 				</el-table-column>
 				<el-table-column prop="endPhone" label="毕业时联系电话">
 				</el-table-column>
@@ -88,8 +88,8 @@
 				<a href="#">[上一页]</a>&nbsp;&nbsp;
 				<a href="#">[下一页] </a>&nbsp;&nbsp;
 				<a href="#">『尾页』</a>&nbsp;&nbsp;
-				<span>共 2335 条 共 234 页 第 1 页 </span> &nbsp;&nbsp;
-				<span>转到第<input type="text" class="inputText4" value="1"></input>页 &nbsp;&nbsp; 
+                <span><i>共 2335 条</i> <i>共 234 页</i> <i>第 1 页</i> </span> &nbsp;&nbsp;
+				<span>转到第<input type="text" class="inputText4" value="1"></input>页 &nbsp;&nbsp;
 					每页<input type="text" class="inputText4" value="10"></input>条 &nbsp;&nbsp;
 				</span>
 				<el-button type="primary" round>提交</el-button>
@@ -102,119 +102,60 @@
 
 <script>
 	export default {
-		data() {
-			return {
-				options: [{
-					value: '选项1',
-					label: '黄金糕'
-				}, {
-					value: '选项2',
-					label: '双皮奶'
-				}, {
-					value: '选项3',
-					label: '蚵仔煎'
-				}, {
-					value: '选项4',
-					label: '龙须面'
-				}, {
-					value: '选项5',
-					label: '北京烤鸭'
-				}],
-				value: '',
+        data() {
+            return {
+                url: './static/vuetable.json',
+                tableData: [],
+                cur_page: 1,
+                multipleSelection: [],
+                select_cate: '',
+                select_word: '',
+                del_list: [],
+                is_search: false
+            }
+        },
+        created(){
+            this.getData();
+        },
+        computed: {
+            data(){
+                const self = this;
+                return self.tableData.filter(function(d){
+//                    let is_del = false;
+//                    for (let i = 0; i < self.del_list.length; i++) {
+//                        if(d.name === self.del_list[i].name){
+//                            is_del = true;
+//                            break;
+//                        }
+//                    }
+//                    if(!is_del){
+//                        if(d.address.indexOf(self.select_cate) > -1 &&
+//                            (d.name.indexOf(self.select_word) > -1 ||
+//                            d.address.indexOf(self.select_word) > -1)
+//                        ){
+//                            return d;
+//                        }
+//                    }
+                    return true;
+                })
+            }
+        },
+        methods: {
+            handleCurrentChange(val){
+                this.cur_page = val;
+                this.getData();
+            },
+            getData(){
+                let self = this;
+                if(process.env.NODE_ENV === 'development'){
+                    self.url = '/ms/example/student';
+                };
+                self.$axios.get(self.url, {page:self.cur_page}).then((res) => {
+                    self.tableData = res.data.data;
+                })
+            }
 
-				tableData: [{
-					xh: '1',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}, {
-					xh: '2',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}, {
-					xh: '3',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}, {
-					xh: '4',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}, {
-					xh: '5',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}, {
-					xh: '6',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}, {
-					xh: '7',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}, {
-					xh: '8',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}, {
-					xh: '9',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}, {
-					xh: '10',
-					name: '张义增',
-					id: '0200806001',
-					contentClass: 'SD0806',
-					sex: '男 ',
-					grad: '本科',
-					startPhone: '13242826559',
-					endPhone: ''
-				}]
-			}
-		}
+        }
 	}
 </script>
 

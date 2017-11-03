@@ -54,6 +54,7 @@
                 select_word: '',
                 del_list: [],
                 is_search: false
+
             }
         },
         created(){
@@ -71,7 +72,7 @@
                         }
                     }
                     if(!is_del){
-                        if(d.address.indexOf(self.select_cate) > -1 && 
+                        if(d.address.indexOf(self.select_cate) > -1 &&
                             (d.name.indexOf(self.select_word) > -1 ||
                             d.address.indexOf(self.select_word) > -1)
                         ){

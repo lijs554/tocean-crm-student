@@ -34,20 +34,20 @@
 
 		<div class="content1">
 			<div class="contentTitle"><b>作业信息查询 </b> (+ 单击标题栏展开)</div>
-			<el-table :data="tableData" border style="width: 100%">
-				<el-table-column prop="xh" label="序号">
+			<el-table :data="data" border style="width: 100%">
+				<el-table-column prop="Number" label="序号" width="130px">
 				</el-table-column>
-				<el-table-column prop="name" label="学员">
+				<el-table-column prop="name" label="学员" width="130px">
 				</el-table-column>
-				<el-table-column prop="contentClass" label="班级">
+				<el-table-column prop="class" label="班级" width="130px">
 				</el-table-column>
-				<el-table-column prop="title" label="作业标题">
+				<el-table-column prop="title" label="作业标题" width="140px">
 				</el-table-column>
-				<el-table-column prop="buzhiDate" label="布置日期">
+				<el-table-column prop="date" label="布置日期" width="140px">
 				</el-table-column>
-				<el-table-column prop="course" label="课程">
+				<el-table-column prop="curriculum" label="课程" width="250px">
 				</el-table-column>
-				<el-table-column prop="score" label="分数">
+				<el-table-column prop="fraction" label="分数" width="130px">
 				</el-table-column>
 			</el-table>
 			<div class="contentBottom">
@@ -55,8 +55,8 @@
 				<a href="#">[上一页]</a>&nbsp;&nbsp;
 				<a href="#">[下一页] </a>&nbsp;&nbsp;
 				<a href="#">『尾页』</a>&nbsp;&nbsp;
-				<span>共 0 条 共 0 页 第 1 页 </span> &nbsp;&nbsp;
-				<span>转到第<input type="text" class="inputText4" value="1"></input>页 &nbsp;&nbsp; 
+                <span><i>共 0 条</i><i>共 0 页</i> <i>第 1 页</i> </span> &nbsp;&nbsp;
+				<span>转到第<input type="text" class="inputText4" value="1"></input>页 &nbsp;&nbsp;
 					每页<input type="text" class="inputText4" value="10"></input>条 &nbsp;&nbsp;
 				</span>
 				<el-button type="primary" round>提交</el-button>
@@ -107,18 +107,53 @@
 				}],
 				value: '',
 
-				tableData: [{
-					xh: '1',
-					name: '詹欣宇',
-					contentClass: 'SD0806',
-					title: '',
-					buzhiDate: '',
-					course: '一个演员的自我修养',
-					score: '100.0'
-				}]
-			}
-		}
-	}
+                tableData: []
+            }
+        },
+        created(){
+            this.getData();
+        },
+        computed: {
+            data(){
+                const self = this;
+                return self.tableData.filter(function(d){
+//                    let is_del = false;
+//                    for (let i = 0; i < self.del_list.length; i++) {
+//                        if(d.name === self.del_list[i].name){
+//                            is_del = true;
+//                            break;
+//                        }
+//                    }
+//                    if(!is_del){
+//                        if(d.address.indexOf(self.select_cate) > -1 &&
+//                            (d.name.indexOf(self.select_word) > -1 ||
+//                            d.address.indexOf(self.select_word) > -1)
+//                        ){
+//                            return d;
+//                        }
+//                    }
+                    return true;
+                })
+            }
+        },
+        methods: {
+            handleCurrentChange(val){
+                this.cur_page = val;
+                this.getData();
+            },
+            getData(){
+                let self = this;
+                if(process.env.NODE_ENV === 'development'){
+                    self.url = '/ms/example/check';
+                };
+                self.$axios.get(self.url, {page:self.cur_page}).then((res) => {
+                    self.tableData = res.data.data;
+                })
+            }
+
+        }
+
+    }
 </script>
 
 <style scoped>

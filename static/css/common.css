@@ -4,21 +4,33 @@ body {
 }
 
 .bg-purple-dark {
-	background: #D1E5E5;
+    background: #d1e2f2;
 	height: 30px;
 	line-height: 30px;
 	padding-left: 5px;
 	margin-bottom: 10px;
+    border: 1px solid rgb(191, 217, 216);
 }
-
+.bg-purple-dark b{
+    font-size: 18px;
+    color: #409EFF;
+    font-weight: bold;
+}
+.bg-purple-dark i{
+    font-size: 12px;
+    padding-left:5px;
+    color:#409EFF;
+    font-style: normal;
+}
 .grid-content {
 	width: 100%;
 }
 
 .navMessage {
 	width: 100%;
-	background: #D1E5E5;
+    background: #d1e2f2;
 	margin-bottom: 10px;
+    border: 1px solid rgb(191, 217, 216);
 }
 
 .nav {
@@ -72,21 +84,65 @@ body {
 }
 
 .contentTitle {
-	background: #D1E5E5;
+    background: #d1e2f2;
 	height: 30px;
 	line-height: 30px;
 	margin-bottom: 10px;
 	padding-left: 10px;
+    border: 1px solid rgb(191, 217, 216);
 }
-
+.contentTitle b{
+    font-size: 18px;
+    color: #409EFF;
+    font-weight: bold;
+}
+.contentTitle i{
+    font-size: 12px;
+    padding-left:5px;
+    color:#409EFF;
+    font-style: normal;
+}
 .contentBottom {
 	margin-top: 10px;
-	line-height: 45px;
+	line-height: 50px;
 	border: 1px solid #C0CCDA;
-	height: 45px;
 	text-align: center;
+    background: #d1e2f2;
+    margin-top:20px;
+    border: 1px solid rgb(191, 217, 216);
+    height:50px;
 }
 
 .contentBottom a {
 	color: #486a6a;
 }
+
+.hr1{
+    height:3px;
+}
+.contentBottom  span i{
+    padding-left:10px;
+    font-style: normal;
+}
+
+
+.table{
+    border:1px solid #C0CCDA;
+    border-collapse:collapse;
+}
+.table th{
+    border:1px solid #C0CCDA;
+    font-size: 15px;
+    color: #333;
+}
+.table td{
+    border:1px solid #C0CCDA;
+    font-size: 15px;
+    color: #333;
+    text-align: center;
+    height:50px;
+    padding:0 20px;
+}
+.el-date-editor.el-input {
+}
+
