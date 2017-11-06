@@ -2,42 +2,52 @@
 	<div>
 		<el-row>
 			<el-col :span="24">
-				<div class="bg-purple-dark">当前功能:<b>学员违纪信息查询 </b></div>
+				<div class="bg-purple-dark"><i>当前功能:</i><b>学员违纪信息查询 </b></div>
 			</el-col>
 		</el-row>
 
-		<div class="navMessage">
-			<div class="nav">
-				<div class="navFirst">
-					班级:
-					<el-select v-model="value" placeholder="请选择">
-						<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-						</el-option>
-					</el-select>
-
-					学员：
+        <div class="navMessage">
+            <div class="nav">
+                <div class="navFirst">
+                    班级:
+                    <el-select v-model="value" placeholder="请选择">
+                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                </el-select>
+                    &nbsp
+					学员:
 					<input type="text" class="inputText1" placeholder="请输入姓名"></input>
 
+
+                </div>
+                <div class="navFirst">
+                    &nbsp
 					时间:
 
 					<span class="demonstration"></span>
-					<el-date-picker v-model="value1" type="date" placeholder="选择日期" :picker-options="pickerOptions0">
-					</el-date-picker>
-					至
-					<span class="demonstration"></span>
-					<el-date-picker v-model="value1" type="date" placeholder="选择日期" :picker-options="pickerOptions0">
-					</el-date-picker>
-
+                    <el-date-picker v-model="value1" type="date" placeholder="选择日期" :picker-options="pickerOptions0">
+                    </el-date-picker>
+                    至
+                    <span class="demonstration"></span>
+                    <el-date-picker v-model="value1" type="date" placeholder="选择日期" :picker-options="pickerOptions0">
+                    </el-date-picker>
+                    &nbsp
+					<select class="selectSex">
+                    <option value="正常">正常</option>
+                    <option value="请假">请假</option>
+                    <option value="迟到">迟到</option>
+                    <option value="早退">早退</option>
+                    <option value="旷课">旷课</option>
+                </select>
+                    &nbsp
 					<el-button type="primary" round>查询</el-button>
+                </div>
+            </div>
 
-				</div>
-
-			</div>
-
-		</div>
+        </div>
 
 		<div class="content1">
-			<div class="contentTitle"><b>学员违纪信息查询 </b> (+ 单击标题栏展开)</div>
+			<div class="contentTitle"><b>学员违纪信息查询 </b> <i>(+ 单击标题栏展开)</i></div>
 			<el-table :data="data" border style="width: 100%">
 				<el-table-column prop="Number" label="序号" width="79px">
 				</el-table-column>
@@ -52,17 +62,21 @@
 				<el-table-column prop="attitude" label="学员违纪态度">
 				</el-table-column>
 			</el-table>
-			<div class="contentBottom">
-				<a href="#">『首页』</a>&nbsp;&nbsp;
-				<a href="#">[上一页]</a>&nbsp;&nbsp;
-				<a href="#">[下一页] </a>&nbsp;&nbsp;
-				<a href="#">『尾页』</a>&nbsp;&nbsp;
-                <span><i>共 2335 条</i> <i>共 234 页</i> <i>第 1 页</i> </span> &nbsp;&nbsp;
-				<span>转到第<input type="text" class="inputText4" value="1"></input>页 &nbsp;&nbsp;
-					每页<input type="text" class="inputText4" value="10"></input>条 &nbsp;&nbsp;
-				</span>
-				<el-button type="primary" round>提交</el-button>
-			</div>
+            <div class="contentBottom">
+                <div class="hr1"></div>
+                <div class="block">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage4"
+                        :page-sizes="[100, 200, 300, 400]"
+                        :page-size="100"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="400">
+                    </el-pagination>
+                </div>
+                <el-button type="primary" class="button" round>提交</el-button>
+            </div>
 		</div>
 
 	</div>

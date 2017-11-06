@@ -104,21 +104,26 @@ body {
 }
 .contentBottom {
 	margin-top: 10px;
-	line-height: 50px;
 	border: 1px solid #C0CCDA;
 	text-align: center;
     background: #d1e2f2;
     margin-top:20px;
     border: 1px solid rgb(191, 217, 216);
-    height:50px;
+    height: 104px;
 }
-
+.contentBottom .block{
+    width: 80%;
+    float: left;
+}
+.contentBottom .button{
+    float: left;
+}
 .contentBottom a {
 	color: #486a6a;
 }
 
 .hr1{
-    height:3px;
+    height:30px;
 }
 .contentBottom  span i{
     padding-left:10px;
@@ -146,3 +151,9 @@ body {
 .el-date-editor.el-input {
 }
 
+.plugins-tips .btn{
+    float: right;
+}
+.plugins-tips{
+    height:40px;
+}

@@ -2,7 +2,7 @@
 	<div>
 		<el-row>
 			<el-col :span="24">
-				<div class="bg-purple-dark">当前功能:<b>项目考核信息查询 </b></div>
+				<div class="bg-purple-dark"><i>当前功能:</i><b>项目考核信息查询 </b></div>
 			</el-col>
 		</el-row>
 
@@ -14,13 +14,13 @@
 						<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
-
-					考评类型:
-					<select class="selectQk">
+                    &nbsp
+                   考评类型:
+                   <select class="selectQk">
 						<option value="初次考核">初次考核</option>
 						<option value="最终考核">最终考核</option>
 					</select>
-
+                    &nbsp
 					项目:
 					<select class="selectXM">
 						<option value="DMS">DMS</option>
@@ -43,9 +43,9 @@
 					<span class="demonstration"></span>
 					<el-date-picker v-model="value1" type="date" placeholder="选择日期" :picker-options="pickerOptions0">
 					</el-date-picker>
-
-					得分:<input type="text" class="inputText2"></input>至<input type="text" class="inputText2"></input>
-
+                    &nbsp
+                   得分:<input type="text" class="inputText2"></input>至<input type="text" class="inputText2"></input>
+                    &nbsp
 					<el-button type="primary" round>查询</el-button>
 
 				</div>
@@ -55,7 +55,7 @@
 		</div>
 
 		<div class="content1">
-			<div class="contentTitle"><b>项目考核信息列表</b> (+ 单击标题栏展开)</div>
+			<div class="contentTitle"><b>项目考核信息列表</b><i>(+ 单击标题栏展开)</i></div>
 			<el-table :data="data" border style="width: 100%">
 				<el-table-column prop="Number" label="序号">
 				</el-table-column>
@@ -72,17 +72,21 @@
 				<el-table-column prop="fraction" label="分数">
 				</el-table-column>
 			</el-table>
-			<div class="contentBottom">
-				<a href="#">『首页』</a>&nbsp;&nbsp;
-				<a href="#">[上一页]</a>&nbsp;&nbsp;
-				<a href="#">[下一页] </a>&nbsp;&nbsp;
-				<a href="#">『尾页』</a>&nbsp;&nbsp;
-                <span><i>共 2 条</i> <i>共 1 页</i> <i>第 1 页</i> </span> &nbsp;&nbsp;
-				<span>转到第<input type="text" class="inputText4" value="1"></input>页 &nbsp;&nbsp;
-					每页<input type="text" class="inputText4" value="10"></input>条 &nbsp;&nbsp;
-				</span>
-				<el-button type="primary" round>提交</el-button>
-			</div>
+            <div class="contentBottom">
+                <div class="hr1"></div>
+                <div class="block">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage4"
+                        :page-sizes="[100, 200, 300, 400]"
+                        :page-size="100"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="400">
+                    </el-pagination>
+                </div>
+                <el-button type="primary" class="button" round>提交</el-button>
+            </div>
 		</div>
 
 	</div>

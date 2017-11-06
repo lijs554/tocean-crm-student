@@ -2,7 +2,7 @@
 	<div>
 		<el-row>
 			<el-col :span="24">
-				<div class="bg-purple-dark">当前功能:<b>作业信息查询 </b></div>
+				<div class="bg-purple-dark"><i>当前功能:</i><b>作业信息查询 </b></div>
 			</el-col>
 		</el-row>
 
@@ -14,16 +14,16 @@
 						<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
-
+                    &nbsp
 					课程:
 					<el-select v-model="value" placeholder="请选择">
 						<el-option v-for="item in courses" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
-
+                    &nbsp
 					学员：
 					<input type="text" class="inputText1" placeholder="请输入姓名"></input>
-
+                    &nbsp
 					<el-button type="primary" round>查询</el-button>
 
 				</div>
@@ -33,7 +33,7 @@
 		</div>
 
 		<div class="content1">
-			<div class="contentTitle"><b>作业信息查询 </b> (+ 单击标题栏展开)</div>
+			<div class="contentTitle"><b>作业信息查询 </b> <i>(+ 单击标题栏展开)</i></div>
 			<el-table :data="data" border style="width: 100%">
 				<el-table-column prop="Number" label="序号" width="130px">
 				</el-table-column>
@@ -50,17 +50,21 @@
 				<el-table-column prop="fraction" label="分数" width="130px">
 				</el-table-column>
 			</el-table>
-			<div class="contentBottom">
-				<a href="#">『首页』</a>&nbsp;&nbsp;
-				<a href="#">[上一页]</a>&nbsp;&nbsp;
-				<a href="#">[下一页] </a>&nbsp;&nbsp;
-				<a href="#">『尾页』</a>&nbsp;&nbsp;
-                <span><i>共 0 条</i><i>共 0 页</i> <i>第 1 页</i> </span> &nbsp;&nbsp;
-				<span>转到第<input type="text" class="inputText4" value="1"></input>页 &nbsp;&nbsp;
-					每页<input type="text" class="inputText4" value="10"></input>条 &nbsp;&nbsp;
-				</span>
-				<el-button type="primary" round>提交</el-button>
-			</div>
+            <div class="contentBottom">
+                <div class="hr1"></div>
+                <div class="block">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage4"
+                        :page-sizes="[100, 200, 300, 400]"
+                        :page-size="100"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="400">
+                    </el-pagination>
+                </div>
+                <el-button type="primary" class="button" round>提交</el-button>
+            </div>
 		</div>
 
 	</div>

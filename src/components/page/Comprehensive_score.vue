@@ -2,7 +2,7 @@
 	<div>
 		<el-row>
 			<el-col :span="24">
-				<div class="bg-purple-dark">当前功能:<b>综合考评分查询</b></div>
+				<div class="bg-purple-dark"><i>当前功能:</i><b>综合考评分查询</b></div>
 			</el-col>
 		</el-row>
 
@@ -14,10 +14,10 @@
 						<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
-
+                    &nbsp
 					学员：
 					<input type="text" class="inputText1" placeholder="请输入姓名"></input>
-
+                    &nbsp
 					<el-button type="primary" round>查询</el-button>
 
 				</div>
@@ -27,48 +27,52 @@
 		</div>
 
 		<div class="content1">
-			<div class="contentTitle"><b>综合考评分查询</b> (+ 单击标题栏展开)</div>
+            <div class="contentTitle"><b>综合考评分查询</b> <i>(+ 单击标题栏展开)</i></div>
 			<el-table :data="tableData" border style="width: 100%">
-				<el-table-column prop="xh" label="序号">
+				<el-table-column prop="Number" label="序号">
 				</el-table-column>
-				<el-table-column prop="name" label="学员">
+				<el-table-column prop="class" label="班级">
 				</el-table-column>
-				<el-table-column prop="contentClass" label="班级">
+				<el-table-column prop="name" label="学生">
 				</el-table-column>
-				<el-table-column prop="kqkf" label="考勤扣分">
+				<el-table-column prop="attendance" label="考勤扣分" width="120px">
 				</el-table-column>
-				<el-table-column prop="wjkf" label="违纪扣分">
+				<el-table-column prop="weiji" label="违纪扣分" width="120px">
 				</el-table-column>
-				<el-table-column prop="byjf" label="表扬加分">
+				<el-table-column prop="biaoyang" label="表扬加分" width="120px">
 				</el-table-column>
-				<el-table-column prop="bjkpjf" label="班级考评加分">
+				<el-table-column prop="cl_attendance" label="班级考评加分" width="130px">
 				</el-table-column>
-				<el-table-column prop="ysf" label="原始分">
+				<el-table-column prop="yuanshi" label="原始分">
 				</el-table-column>
-				<el-table-column prop="zyszf" label="职业素质分">
+				<el-table-column prop="zhiye" label="职业素质分" width="140px">
 				</el-table-column>
-				<el-table-column prop="xmf" label="项目分">
+				<el-table-column prop="project" label="项目分">
 				</el-table-column>
-				<el-table-column prop="zyf" label="作业分">
+				<el-table-column prop="work" label="作业分">
 				</el-table-column>
-				<el-table-column prop="ysf2" label="原始分">
+				<el-table-column prop="yuanshi1" label="原始分">
 				</el-table-column>
-				<el-table-column prop="jsnlf" label="技术能力分">
+				<el-table-column prop="jishu" label="技术能力分" width="140px">
 				</el-table-column>
-				<el-table-column prop="gtnlf" label="沟通能力分">
+				<el-table-column prop="gouton" label="沟通能力分" width="140px">
 				</el-table-column>
 			</el-table>
-			<div class="contentBottom">
-				<a href="#">『首页』</a>&nbsp;&nbsp;
-				<a href="#">[上一页]</a>&nbsp;&nbsp;
-				<a href="#">[下一页] </a>&nbsp;&nbsp;
-				<a href="#">『尾页』</a>&nbsp;&nbsp;
-				<span>共 2 条 共 1 页 第 1 页 </span> &nbsp;&nbsp;
-				<span>转到第<input type="text" class="inputText4" value="1"></input>页 &nbsp;&nbsp; 
-					每页<input type="text" class="inputText4" value="10"></input>条 &nbsp;&nbsp;
-				</span>
-				<el-button type="primary" round>提交</el-button>
-			</div>
+            <div class="contentBottom">
+                <div class="hr1"></div>
+                <div class="block">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage4"
+                        :page-sizes="[100, 200, 300, 400]"
+                        :page-size="100"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="400">
+                    </el-pagination>
+                </div>
+                <el-button type="primary" class="button" round>提交</el-button>
+            </div>
 		</div>
 
 	</div>
@@ -95,94 +99,61 @@
 					value: '选项5',
 					label: '北京烤鸭'
 				}],
-				value: '',
+                currentPage1: 5,
+                currentPage2: 5,
+                currentPage3: 5,
+                currentPage4: 4,
+                tableData: []
+            }
+        },
+        created(){
+            this.getData();
+        },
+        computed: {
+            data(){
+                const self = this;
+                return self.tableData.filter(function(d){
+//                    let is_del = false;
+//                    for (let i = 0; i < self.del_list.length; i++) {
+//                        if(d.name === self.del_list[i].name){
+//                            is_del = true;
+//                            break;
+//                        }
+//                    }
+//                    if(!is_del){
+//                        if(d.address.indexOf(self.select_cate) > -1 &&
+//                            (d.name.indexOf(self.select_word) > -1 ||
+//                            d.address.indexOf(self.select_word) > -1)
+//                        ){
+//                            return d;
+//                        }
+//                    }
+                    return true;
+                })
+            }
+        },
+        methods: {
+            handleCurrentChange(val){
+                this.cur_page = val;
+                this.getData();
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            getData(){
+                let self = this;
+                if(process.env.NODE_ENV === 'development'){
+                    self.url = '/ms/example/fenshu';
+                };
+                self.$axios.get(self.url, {page:self.cur_page}).then((res) => {
+                    self.tableData = res.data.data;
+                })
+            }
 
-				tableData: [{
-						xh: '1',
-						name: '詹欣宇',
-						contentClass: 'SD0806',
-						kqkf: '0.0',
-						wjkf: '0.0',
-						byjf: '0.0',
-						bjkpjf: '0.0',
-						ysf: '',
-						zyszf: '0.0',
-						xmf: '0.0 * 0',
-						zyf: '0.0 * 0',
-						ysf2: '',
-						jsnlf: '0.0',
-						gtnlf: '0.0'
-					},
-					{
-						xh: '2',
-						name: '詹欣宇',
-						contentClass: 'SD0806',
-						kqkf: '0.0',
-						wjkf: '0.0',
-						byjf: '0.0',
-						bjkpjf: '0.0',
-						ysf: '',
-						zyszf: '0.0',
-						xmf: '0.0 * 0',
-						zyf: '0.0 * 0',
-						ysf2: '',
-						jsnlf: '0.0',
-						gtnlf: '0.0'
-					},
-					{
-						xh: '3',
-						name: '詹欣宇',
-						contentClass: 'SD0806',
-						kqkf: '0.0',
-						wjkf: '0.0',
-						byjf: '0.0',
-						bjkpjf: '0.0',
-						ysf: '',
-						zyszf: '0.0',
-						xmf: '0.0 * 0',
-						zyf: '0.0 * 0',
-						ysf2: '',
-						jsnlf: '0.0',
-						gtnlf: '0.0'
-					},
-					{
-						xh: '4',
-						name: '詹欣宇',
-						contentClass: 'SD0806',
-						kqkf: '0.0',
-						wjkf: '0.0',
-						byjf: '0.0',
-						bjkpjf: '0.0',
-						ysf: '',
-						zyszf: '0.0',
-						xmf: '0.0 * 0',
-						zyf: '0.0 * 0',
-						ysf2: '',
-						jsnlf: '0.0',
-						gtnlf: '0.0'
-					}, {
-						xh: '5',
-						name: '詹欣宇',
-						contentClass: 'SD0806',
-						kqkf: '0.0',
-						wjkf: '0.0',
-						byjf: '0.0',
-						bjkpjf: '0.0',
-						ysf: '',
-						zyszf: '0.0',
-						xmf: '0.0 * 0',
-						zyf: '0.0 * 0',
-						ysf2: '',
-						jsnlf: '0.0',
-						gtnlf: '0.0'
-					}
-				],
-
-			}
-		}
-	}
+        }
+    }
 </script>
 
 <style scoped>
-	@import '../../../static/css/common.css';
+    @import '../../../static/css/common.css';
 </style>

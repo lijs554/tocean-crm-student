@@ -1,13 +1,12 @@
 <template>
     <div>
-        <div class="crumbs">
-            <el-row>
-                <el-col :span="2" ><div class="grid-content bg-purple-light font1">当前功能：</div></el-col>
-                <el-col :span="90"><div class="grid-content bg-purple-light font2">调查列表管理</div></el-col>
-            </el-row>
-        </div>
+        <el-row>
+            <el-col :span="24">
+                <div class="bg-purple-dark"><i>当前功能:</i><b>调查列表管理 </b></div>
+            </el-col>
+        </el-row>
         <div class="plugins-tips">
-            <input class="btn" type="button" value="提交"/>
+            <el-button type="primary" round class="btn">提交</el-button>
         </div>
         <div class="border">
             <div class="select-tips">
@@ -20,13 +19,11 @@
                 </tr>
             </table>
         </div>
-        <div class="max_btn">
-            <div class="btn_box">
-                <input class="btn1" type="button" value="确认提交"/>
-                <input class="btn1" type="button" value="重新输入"/>
-            </div>
+        <div class="contentBottom">
+            <div class="hr1"></div>
+            <el-button type="primary" round>确认提交</el-button>
+            <el-button type="primary" round>重新输入</el-button>
         </div>
-
     </div>
 </template>
 
@@ -57,6 +54,7 @@
 </script>
 
 <style scoped>
+    @import '../../../static/css/common.css';
     .border{
         width:100%;
         height:auto;
@@ -145,22 +143,7 @@
         margin-left:-50px;
         margin-top:30px;
     }
-    .plugins-tips .btn{
-        background: #f0f0f0;
-        color: #409EFF;
-        float: right;
-        border: 1px solid #d1e2f2;
-        margin-top: -10px;
-        margin-right: 20px;
-    }
-    .plugins-tips .btn1{
-        background: #f0f0f0;
-        color: #409EFF;
-        float: right;
-        border: 1px solid #d1e2f2;
-        margin-top: -10px;
-        margin-right:10px;
-    }
+
     .bg-purple-light {
         background: #e5e9f2;
     }

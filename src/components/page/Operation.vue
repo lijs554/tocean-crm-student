@@ -1,142 +1,123 @@
 <template>
-    <div class="table">
-        <div class="crumbs">
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i> 表格</el-breadcrumb-item>
-                <el-breadcrumb-item>基础表格</el-breadcrumb-item>
-            </el-breadcrumb>
+    <div>
+        <el-row>
+            <el-col :span="24">
+                <div class="bg-purple-dark"><i>当前功能:</i><b>提交作业 </b></div>
+            </el-col>
+        </el-row>
+        <div class="el-button1"  style="
+             background-color:  #d1e2f2;height: 50px"  >
+
+            <el-button class="elbutton1" style="margin-bottom: 15px;margin-top: 10px;margin-left: 900px" @click="onSubmit">提交</el-button>
         </div>
-        <div class="handle-box">
-            <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-            <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
-                <el-option key="1" label="广东省" value="广东省"></el-option>
-                <el-option key="2" label="湖南省" value="湖南省"></el-option>
-            </el-select>
-            <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-            <el-button type="primary" icon="search" @click="search">搜索</el-button>
+        <div class="middle">
+            <el-collapse v-model="activeNames" @change="handleChange">
+
+                <el-collapse-item title="基本资料(+ 单击标题栏展开)" name="1">
+                    <div class="top"><span class="middle-top-s2">您不是学员，不能提交作业！</span></div>
+                    <div class="bottom">
+                        <table class="middle-table" border="1">
+                            <tr>
+                                <td align="center">标题</td>
+                                <td><input class="middle-input"/></td>
+                                <td align="center" width="100px">学员</td>
+                                <td><input  class="middle-input"/></td>
+                            </tr>
+                            <tr>
+                                <td align="center">源代码和文档</td>
+                                <td colspan="3"><input  type="file" class="middle-input-1" placeholder="未选择任何项目"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </el-collapse-item>
+            </el-collapse>
         </div>
-        <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column prop="date" label="日期" sortable width="150">
-            </el-table-column>
-            <el-table-column prop="name" label="姓名" width="120">
-            </el-table-column>
-            <el-table-column prop="address" label="地址" :formatter="formatter">
-            </el-table-column>
-            <el-table-column label="操作" width="180">
-                <template scope="scope">
-                    <el-button size="small"
-                            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button size="small" type="danger"
-                            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <div class="pagination">
-            <el-pagination
-                    @current-change ="handleCurrentChange"
-                    layout="prev, pager, next"
-                    :total="1000">
-            </el-pagination>
+
+
+        <div class="middle-last" align="center">
+            <el-button class="middle-last-button" style="margin-top: 10px;margin-bottom: 10px" @click="sure">确认提交</el-button>
+            <el-button class="middle-last-button" style="margin-top: 10px;margin-bottom: 10px" @click="again">重新输入</el-button>
         </div>
+
     </div>
 </template>
 
 <script>
+    import ElButtonGroup from "../../../node_modules/element-ui/packages/button/src/button-group";
+    import ElFormItem from "../../../node_modules/element-ui/packages/form/src/form-item";
+    import ElButton from "../../../node_modules/element-ui/packages/button/src/button";
     export default {
-        data() {
-            return {
-                url: './static/vuetable.json',
-                tableData: [],
-                cur_page: 1,
-                multipleSelection: [],
-                select_cate: '',
-                select_word: '',
-                del_list: [],
-                is_search: false
-            }
-        },
-        created(){
-            this.getData();
-        },
-        computed: {
-            data(){
-                const self = this;
-                return self.tableData.filter(function(d){
-                    let is_del = false;
-                    for (let i = 0; i < self.del_list.length; i++) {
-                        if(d.name === self.del_list[i].name){
-                            is_del = true;
-                            break;
-                        }
-                    }
-                    if(!is_del){
-                        if(d.address.indexOf(self.select_cate) > -1 && 
-                            (d.name.indexOf(self.select_word) > -1 ||
-                            d.address.indexOf(self.select_word) > -1)
-                        ){
-                            return d;
-                        }
-                    }
-                })
-            }
-        },
+
         methods: {
-            handleCurrentChange(val){
-                this.cur_page = val;
-                this.getData();
+            onSubmit() {
+                this.$message({
+                    showClose: true,
+                    message: "提交成功"
+
+                });
             },
-            getData(){
-                let self = this;
-                if(process.env.NODE_ENV === 'development'){
-                    self.url = '/ms/table/list';
-                };
-                self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
-                    self.tableData = res.data.list;
-                })
+            sure(){
+                this.$message({
+                    showClose: true,
+                    message: "信息已确认，我爱你！"
+
+                });
             },
-            search(){
-                this.is_search = true;
-            },
-            formatter(row, column) {
-                return row.address;
-            },
-            filterTag(value, row) {
-                return row.tag === value;
-            },
-            handleEdit(index, row) {
-                this.$message('编辑第'+(index+1)+'行');
-            },
-            handleDelete(index, row) {
-                this.$message.error('删除第'+(index+1)+'行');
-            },
-            delAll(){
-                const self = this,
-                    length = self.multipleSelection.length;
-                let str = '';
-                self.del_list = self.del_list.concat(self.multipleSelection);
-                for (let i = 0; i < length; i++) {
-                    str += self.multipleSelection[i].name + ' ';
-                }
-                self.$message.error('删除了'+str);
-                self.multipleSelection = [];
-            },
-            handleSelectionChange(val) {
-                this.multipleSelection = val;
+            again(){
+                this.$message({
+                    showClose: true,
+                    message: "重新输入中，我还是爱你！"
+
+                });
             }
         }
     }
 </script>
+<style >
+    .middle{
 
-<style scoped>
-.handle-box{
-    margin-bottom: 20px;
-}
-.handle-select{
-    width: 120px;
-}
-.handle-input{
-    width: 300px;
-    display: inline-block;
-}
+        margin-top: 20px;
+    }
+    .middle-top{
+        margin:10px 0px 10px 10px;
+    }
+    span.middle-top-s1{
+
+        font-weight: bold;
+    }
+    span.middle-top-s{
+        font-size: 10px;
+    }
+    span.middle-top-s2{
+        background-color: yellow;
+    }
+    table.middle-table{
+        width: 950px;
+        margin-left: 25px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        border-collapse: collapse;
+    }
+    input.middle-input{
+        width: 300px;
+        height: 30px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 5px;
+    }
+    input.middle-input-1{
+        width: 500px;
+        height: 30px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 5px;
+    }
+    .middle-last{
+        background-color: #d1e2f2;
+        margin-top: 20px;
+    }
+
+    @import '../../../static/css/common.css';
+
 </style>

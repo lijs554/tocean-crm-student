@@ -2,7 +2,7 @@
 	<div>
 		<el-row>
 			<el-col :span="24">
-				<div class="bg-purple-dark">当前功能:<b>学员信息查询</b></div>
+				<div class="bg-purple-dark"><i>当前功能:</i><b>学员信息查询</b></div>
 			</el-col>
 		</el-row>
 
@@ -14,27 +14,27 @@
 						<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
-
+                    &nbsp
 					学员：
 					<input type="text" class="inputText1" placeholder="请输入姓名"></input>
-
+                    &nbsp
 					性别:
 					<select class="selectSex">
 						<option value="男">男</option>
 						<option value="女">女</option>
 					</select>
-
-					毕业学校:
-					<input type="text" class="inputText1" placeholder="请输入学校"></input>
+                    &nbsp
+                   毕业学校:
+                   <input type="text" class="inputText1" placeholder="请输入学校"></input>
 				</div>
 
 				<div class="navFirst">
 					院系：
 					<input type="text" class="inputText1" placeholder="请输入院系"></input>
-
-					专业：
-					<input type="text" class="inputText1" placeholder="请输入专业"></input>
-
+                    &nbsp
+                   专业：
+                   <input type="text" class="inputText1" placeholder="请输入专业"></input>
+                    &nbsp
 					学历:
 					<select class="selectSex">
 						<option value="硕士">硕士</option>
@@ -43,19 +43,21 @@
 						<option value="高中">高中</option>
 						<option value="其他">其他</option>
 					</select>
+                    &nbsp
 					联系电话：
 					<input type="text" class="inputText1" placeholder="请输入电话"></input>
 
 				</div>
 
 				<div class="navFirst">
-					就业薪资:<input type="text" class="inputText2"></input>至<input type="text" class="inputText2"></input>
-
-					就业公司:<input type="text" class="inputText3" placeholder="请输入公司"></input>
-
+					就业薪资:&nbsp<input type="text" class="inputText2"></input>至<input type="text" class="inputText2"></input>
+                    &nbsp
+                   就业公司:<input type="text" class="inputText3" placeholder="请输入公司"></input>
+                    &nbsp
 					就业职位:<input type="text" class="inputText1" placeholder="请输入职位"></input>
-
+                    &nbsp
 					<el-button type="primary" round>查询</el-button>
+                    &nbsp
 					<el-button type="success" round>导出EXCEL</el-button>
 				</div>
 
@@ -64,7 +66,7 @@
 		</div>
 
 		<div class="content1">
-			<div class="contentTitle"><b>学员信息列表</b> (+ 单击标题栏展开)</div>
+			<div class="contentTitle"><b>学员信息列表</b> <i>(+ 单击标题栏展开)</i></div>
 			<el-table :data="data"  border style="width: 100%">
 				<el-table-column prop="Number" label="序号" width="79px">
 				</el-table-column>
@@ -83,17 +85,21 @@
 				<el-table-column prop="endPhone" label="毕业时联系电话">
 				</el-table-column>
 			</el-table>
-			<div class="contentBottom">
-				<a href="#">『首页』</a>&nbsp;&nbsp;
-				<a href="#">[上一页]</a>&nbsp;&nbsp;
-				<a href="#">[下一页] </a>&nbsp;&nbsp;
-				<a href="#">『尾页』</a>&nbsp;&nbsp;
-                <span><i>共 2335 条</i> <i>共 234 页</i> <i>第 1 页</i> </span> &nbsp;&nbsp;
-				<span>转到第<input type="text" class="inputText4" value="1"></input>页 &nbsp;&nbsp;
-					每页<input type="text" class="inputText4" value="10"></input>条 &nbsp;&nbsp;
-				</span>
-				<el-button type="primary" round>提交</el-button>
-			</div>
+            <div class="contentBottom">
+                <div class="hr1"></div>
+                <div class="block">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage4"
+                        :page-sizes="[100, 200, 300, 400]"
+                        :page-size="100"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="400">
+                    </el-pagination>
+                </div>
+                <el-button type="primary" class="button" round>提交</el-button>
+            </div>
 		</div>
 
 	</div>
@@ -104,14 +110,7 @@
 	export default {
         data() {
             return {
-                url: './static/vuetable.json',
-                tableData: [],
-                cur_page: 1,
-                multipleSelection: [],
-                select_cate: '',
-                select_word: '',
-                del_list: [],
-                is_search: false
+                tableData: []
             }
         },
         created(){
